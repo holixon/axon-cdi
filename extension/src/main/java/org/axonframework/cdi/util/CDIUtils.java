@@ -1,5 +1,7 @@
 package org.axonframework.cdi.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
@@ -12,7 +14,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
+@Slf4j
 public class CDIUtils {
+
+  private static final String JNDI_BM = "java:comp/BeanManager";
 
   /**
    * Retrieves a object reference of a given type.
@@ -24,8 +29,7 @@ public class CDIUtils {
   @SuppressWarnings("unchecked")
   public static final <T> T getReference(final BeanManager beanManager, final Class<T> clazz) {
     final Bean<T> bean = (Bean<T>) beanManager.getBeans(clazz).iterator().next();
-    final T instance = (T) beanManager.getReference(bean, clazz, beanManager.createCreationalContext(bean));
-    return instance;
+    return (T) beanManager.getReference(bean, clazz, beanManager.createCreationalContext(bean));
   }
 
   /**
@@ -34,7 +38,7 @@ public class CDIUtils {
    * @param bm       bean manager
    * @param bean     bean
    * @param beanType bean type.
-   * @return
+   * @return object reference.
    */
   @SuppressWarnings("unchecked")
   public static <T> T getReference(final BeanManager bm, final Bean<T> bean, final Type beanType) {
@@ -49,8 +53,7 @@ public class CDIUtils {
    * @return true if at least one annotated method is present.
    */
   public static final boolean hasAnnotatedMethod(final Bean<?> bean, final Class<? extends Annotation> clazz) {
-    final boolean hasAnnotation = Arrays.stream(bean.getBeanClass().getMethods()).filter(m -> m.isAnnotationPresent(clazz)).findAny().isPresent();
-    return hasAnnotation;
+    return Arrays.stream(bean.getBeanClass().getMethods()).anyMatch(m -> m.isAnnotationPresent(clazz));
   }
 
   /**
@@ -91,9 +94,9 @@ public class CDIUtils {
   public static BeanManager getBeanManager() {
     try {
       final InitialContext ctx = new InitialContext();
-      return (BeanManager) ctx.lookup("java:comp/BeanManager");
+      return (BeanManager) ctx.lookup(JNDI_BM);
     } catch (final NamingException e) {
-
+      log.error("Bean Manager could not be found under {}", JNDI_BM);
     }
     return null;
   }

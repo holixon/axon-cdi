@@ -20,18 +20,19 @@ import java.util.Objects;
  */
 public class TxAwareJPAEventStorageEngine extends JpaEventStorageEngine {
 
+  private static final String TX_MGR_NOT_NULL = "Transaction manager must not be null";
   private final TransactionManager transactionManager;
 
   public TxAwareJPAEventStorageEngine(final EntityManagerProvider entityManagerProvider, final TransactionManager transactionManager) {
     super(entityManagerProvider, transactionManager);
-    Objects.requireNonNull(transactionManager, "Transaction manager must not be null");
+    Objects.requireNonNull(transactionManager, TX_MGR_NOT_NULL);
     this.transactionManager = transactionManager;
   }
 
   public TxAwareJPAEventStorageEngine(final Serializer serializer, final EventUpcaster upcasterChain, final DataSource dataSource,
                                       final EntityManagerProvider entityManagerProvider, final TransactionManager transactionManager) throws SQLException {
     super(serializer, upcasterChain, dataSource, entityManagerProvider, transactionManager);
-    Objects.requireNonNull(transactionManager, "Transaction manager must not be null");
+    Objects.requireNonNull(transactionManager, TX_MGR_NOT_NULL);
     this.transactionManager = transactionManager;
   }
 
@@ -40,7 +41,7 @@ public class TxAwareJPAEventStorageEngine extends JpaEventStorageEngine {
                                       final TransactionManager transactionManager, final Long lowestGlobalSequence, final Integer maxGapOffset, final boolean explicitFlush) {
     super(serializer, upcasterChain, persistenceExceptionResolver, serializer, batchSize, entityManagerProvider, transactionManager, lowestGlobalSequence, maxGapOffset,
       explicitFlush);
-    Objects.requireNonNull(transactionManager, "Transaction manager must not be null");
+    Objects.requireNonNull(transactionManager, TX_MGR_NOT_NULL);
     this.transactionManager = transactionManager;
   }
 
