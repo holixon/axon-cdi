@@ -1,19 +1,20 @@
 package org.axonframework.cdi.stereotype;
 
+import org.axonframework.commandhandling.model.AggregateRoot;
+
+import javax.inject.Named;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.inject.Named;
-
-import org.axonframework.commandhandling.model.AggregateRoot;
-
 /**
  * Annotation that informs Axon's auto configurer for CDI that a given
  * {@link Named} is an aggregate instance.
+ *
+ * @author Simon Zambrovski, Holisticon AG
  */
-@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Named
 @AggregateRoot
