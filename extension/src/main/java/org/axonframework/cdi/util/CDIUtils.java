@@ -67,10 +67,6 @@ public class CDIUtils {
   public static boolean hasAnnotatedMember(final Bean<?> bean, final Class<? extends Annotation>... classes) {
     // TODO re-write with lambda
     final Class<?> beanClazz = bean.getBeanClass();
-    if (beanClazz.getDeclaredFields().length == 0) {
-      return false;
-    }
-
     for (final Field field : beanClazz.getDeclaredFields()) {
       boolean found = true;
       for (final Class<? extends Annotation> clazz : classes) {
