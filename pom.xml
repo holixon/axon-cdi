@@ -6,9 +6,9 @@
   <artifactId>axon-cdi-root</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
+
   <name>AxonFramework Parent</name>
-  	
+
 	<scm>
 		<connection>scm:git@github.com:holisticon/axon-cdi.git</connection>
 		<tag>HEAD</tag>
@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<axon.version>3.1</axon.version>
+		<axon.version>3.1.1</axon.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<junit.version>4.12</junit.version>
     <assertj.version>3.8.0</assertj.version>
@@ -46,20 +46,28 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <scope>provided</scope>
         <version>${slf4j.version}</version>
+        <scope>provided</scope>
       </dependency>
-      
+
       <!-- Test -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>test</scope>
+      </dependency>
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>${assertj.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -67,5 +75,8 @@
   <modules>
     <module>extension</module>
   </modules>
-  
+
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+  </build>
 </project>

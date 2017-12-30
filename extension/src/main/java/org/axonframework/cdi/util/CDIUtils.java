@@ -12,7 +12,9 @@ import javax.naming.NamingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.Arrays;
+import java.util.function.Predicate;
+
+import static java.util.Arrays.stream;
 
 @Slf4j
 public class CDIUtils {
@@ -53,7 +55,7 @@ public class CDIUtils {
    * @return true if at least one annotated method is present.
    */
   public static final boolean hasAnnotatedMethod(final Bean<?> bean, final Class<? extends Annotation> clazz) {
-    return Arrays.stream(bean.getBeanClass().getMethods()).anyMatch(m -> m.isAnnotationPresent(clazz));
+    return stream(bean.getBeanClass().getMethods()).anyMatch(m -> m.isAnnotationPresent(clazz));
   }
 
   /**
@@ -65,21 +67,9 @@ public class CDIUtils {
    */
   @SafeVarargs
   public static boolean hasAnnotatedMember(final Bean<?> bean, final Class<? extends Annotation>... classes) {
-    // TODO re-write with lambda
-    final Class<?> beanClazz = bean.getBeanClass();
-    for (final Field field : beanClazz.getDeclaredFields()) {
-      boolean found = true;
-      for (final Class<? extends Annotation> clazz : classes) {
-        if (!field.isAnnotationPresent(clazz)) {
-          found = false;
-          break;
-        }
-      }
-      if (found) {
-        return true;
-      }
-    }
-    return false;
+    final Predicate<Field> hasAllAnnotations = field -> stream(classes).allMatch(field::isAnnotationPresent);
+
+    return stream(bean.getBeanClass().getDeclaredFields()).anyMatch(hasAllAnnotations);
   }
 
   /**
