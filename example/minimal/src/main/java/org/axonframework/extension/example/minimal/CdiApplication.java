@@ -16,7 +16,8 @@ import javax.persistence.PersistenceUnit;
 @Slf4j
 public class CdiApplication {
 
-  // @EventStoreEnginePersistenceUnit
+// TODO add support for marked event storage engine PU.
+//  @EventStoreEnginePersistenceUnit
 //  @PersistenceUnit
 //  private EntityManager em;
 
@@ -31,6 +32,20 @@ public class CdiApplication {
     commandGateway.send(new CreateAccountCommand("4711", 1000));
     // commandBus.dispatch(asCommandMessage(new CreateAccountCommand("4711",
     // 1000)));
+  }
+
+  public static void main(final String[] args) throws Exception {
+    final CdiContainer container = CdiContainerLoader.getCdiContainer();
+    try {
+      container.boot();
+      final CdiApplication application = CDI.current().select(CdiApplication.class).get();
+      application.run();
+    } catch (Exception e) {
+      log.error("Error in example", e);
+    } finally {
+      container.shutdown();
+      log.info("Shutting down...");
+    }
   }
 
 }
