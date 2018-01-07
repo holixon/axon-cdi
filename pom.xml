@@ -74,6 +74,7 @@
 
   <modules>
     <module>extension</module>
+    <module>example</module>
   </modules>
 
   <build>

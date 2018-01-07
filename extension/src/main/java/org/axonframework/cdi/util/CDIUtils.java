@@ -68,7 +68,6 @@ public class CDIUtils {
   @SafeVarargs
   public static boolean hasAnnotatedMember(final Bean<?> bean, final Class<? extends Annotation>... classes) {
     final Predicate<Field> hasAllAnnotations = field -> stream(classes).allMatch(field::isAnnotationPresent);
-
     return stream(bean.getBeanClass().getDeclaredFields()).anyMatch(hasAllAnnotations);
   }
 
