@@ -1,4 +1,4 @@
-package org.axonframework.extension.example.wildfly.core;
+package org.axonframework.extension.example.common.core;
 
 import org.axonframework.extension.example.common.core.api.AccountCreatedEvent;
 import org.axonframework.extension.example.common.core.api.CreateAccountCommand;
