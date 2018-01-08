@@ -13,8 +13,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.axonframework.extension</groupId>
-      <artifactId>axon-cdi</artifactId>
+      <groupId>org.axonframework.extension.example</groupId>
+      <artifactId>axon-common</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>

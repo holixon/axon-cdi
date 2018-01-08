@@ -21,6 +21,10 @@
       <artifactId>axon-cdi</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.axonframework.extension.example</groupId>
+      <artifactId>axon-common</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
@@ -34,24 +38,6 @@
       <artifactId>javaee-api</artifactId>
       <version>${javaee-api.version}</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.axonframework</groupId>
-      <artifactId>axon-test</artifactId>
-      <version>${axon.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 

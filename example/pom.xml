@@ -14,6 +14,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>axon-common</module>
     <module>deltaspike</module>
     <module>wildfly</module>
   </modules>
@@ -26,6 +27,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.axonframework.extension.example</groupId>
+        <artifactId>axon-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.axonframework.extension</groupId>
         <artifactId>axon-cdi</artifactId>
