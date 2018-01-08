@@ -11,6 +11,9 @@
   <name>AxonFramework Wildfly Example</name>
   <artifactId>wildfly</artifactId>
   <packaging>war</packaging>
+  <properties>
+    <javaee-api.version>7.0</javaee-api.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -29,6 +32,7 @@
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
+      <version>${javaee-api.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -52,6 +56,7 @@
   </dependencies>
 
   <build>
+    <defaultGoal>clean wildfly:run wildfly:deploy</defaultGoal>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

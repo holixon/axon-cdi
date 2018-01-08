@@ -10,7 +10,6 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import java.lang.reflect.Executable;
 import java.lang.reflect.Parameter;
-import java.lang.reflect.Type;
 import java.util.Set;
 
 /**

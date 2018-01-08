@@ -6,26 +6,33 @@ import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.interceptors.EventLoggingInterceptor;
+import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
+import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
 import org.axonframework.extension.example.minimal.core.api.CreateAccountCommand;
 
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
 
 @Slf4j
 public class CdiApplication {
-
-// TODO add support for marked event storage engine PU.
-//  @EventStoreEnginePersistenceUnit
-//  @PersistenceUnit
-//  private EntityManager em;
 
   @Inject
   private EventBus eventBus;
 
   @Inject
   private CommandGateway commandGateway;
+
+  /**
+   * Produces container transaction aware JPA storage engine.
+   *
+   * @return Event storage engine.
+   */
+  @Produces
+  public EventStorageEngine eventStorageEngine() {
+    return new InMemoryEventStorageEngine();
+  }
+
 
   public void run() {
     eventBus.registerDispatchInterceptor(new EventLoggingInterceptor());

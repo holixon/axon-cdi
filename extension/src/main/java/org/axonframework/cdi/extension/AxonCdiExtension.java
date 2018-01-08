@@ -26,6 +26,7 @@ import org.axonframework.serialization.Serializer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Destroyed;
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.*;
 import javax.persistence.PersistenceUnit;
@@ -304,7 +305,8 @@ public class AxonCdiExtension implements Extension {
 
     // event storage engine
     if (this.eventStorageEngineProducer != null) {
-      final EventStorageEngine eventStorageEngine = this.eventStorageEngineProducer.produce(bm.createCreationalContext(null));
+      final CreationalContext<EventStorageEngine> ctx = bm.createCreationalContext(null);
+      final EventStorageEngine eventStorageEngine = this.eventStorageEngineProducer.produce(ctx);
       log.info("Registering event storage {}", eventStorageEngine.getClass().getSimpleName());
       configurer.configureEmbeddedEventStore(c -> eventStorageEngine);
     }

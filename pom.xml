@@ -15,14 +15,21 @@
 	</scm>
 
 	<properties>
+
 		<java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     <axon.version>3.1.1</axon.version>
-		<slf4j.version>1.7.25</slf4j.version>
+    <lombok.version>1.16.18</lombok.version>
+
+    <cdi-api.version>2.0</cdi-api.version>
+    <jpa-api.version>1.0.0.Final</jpa-api.version>
+    <transaction-api.version>1.2</transaction-api.version>
+
+    <slf4j.version>1.7.25</slf4j.version>
 		<junit.version>4.12</junit.version>
     <assertj.version>3.8.0</assertj.version>
-    <lombok.version>1.16.18</lombok.version>
-    <javaee-api.version>7.0</javaee-api.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 	</properties>
 
   <dependencyManagement>
@@ -39,9 +46,26 @@
         <scope>provided</scope>
       </dependency>
       <dependency>
-        <groupId>javax</groupId>
-        <artifactId>javaee-api</artifactId>
-        <version>${javaee-api.version}</version>
+        <groupId>javax.enterprise</groupId>
+        <artifactId>cdi-api</artifactId>
+        <version>${cdi-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <version>1</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.transaction</groupId>
+        <artifactId>javax.transaction-api</artifactId>
+        <version>${transaction-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.1-api</artifactId>
+        <version>${jpa-api.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -50,6 +74,7 @@
         <version>${slf4j.version}</version>
         <scope>provided</scope>
       </dependency>
+
 
       <!-- Test -->
       <dependency>

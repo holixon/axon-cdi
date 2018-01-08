@@ -3,10 +3,7 @@ package org.axonframework.cdi.util;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.InjectionTarget;
+import javax.enterprise.inject.spi.*;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.lang.annotation.Annotation;
@@ -18,8 +15,6 @@ import static java.util.Arrays.stream;
 
 @Slf4j
 public class CDIUtils {
-
-  private static final String JNDI_BM = "java:comp/BeanManager";
 
   /**
    * Retrieves a object reference of a given type.
@@ -77,13 +72,7 @@ public class CDIUtils {
    * @return bean manager, if any, or <code>null</code>
    */
   public static BeanManager getBeanManager() {
-    try {
-      final InitialContext ctx = new InitialContext();
-      return (BeanManager) ctx.lookup(JNDI_BM);
-    } catch (final NamingException e) {
-      log.error("Bean Manager could not be found under {}", JNDI_BM);
-    }
-    return null;
+    return CDI.current().getBeanManager();
   }
 
   /**
