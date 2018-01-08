@@ -2,6 +2,7 @@ package org.axonframework.common.transaction;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ import javax.transaction.*;
  * Uses provided entity manager and accesses JTA UserTransaction from JNDI provided by the container.
  * </p>
  *
- * @author Simon Zambrovski, Holisticon AG
+ * @author Simon Zambrovski
  */
 @Slf4j
 public class ContainerTransactionManager implements TransactionManager {

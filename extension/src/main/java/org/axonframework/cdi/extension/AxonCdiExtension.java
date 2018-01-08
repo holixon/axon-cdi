@@ -2,6 +2,7 @@ package org.axonframework.cdi.extension;
 
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.cdi.stereotype.Aggregate;
+import org.axonframework.cdi.stereotype.EventStoreEnginePersistenceUnit;
 import org.axonframework.cdi.stereotype.SubscribingEventProcessor;
 import org.axonframework.cdi.util.CDIUtils;
 import org.axonframework.commandhandling.CommandBus;
@@ -27,6 +28,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.*;
+import javax.persistence.PersistenceUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -205,6 +207,10 @@ public class AxonCdiExtension implements Extension {
       eventHandlers.add(bean);
       log.debug("Found event handler {}", bean.getBeanClass().getSimpleName());
     }
+
+    if (CDIUtils.hasAnnotatedMember(bean, PersistenceUnit.class, EventStoreEnginePersistenceUnit.class)) {
+      log.debug("Found persistent unit for event store {}", pb);
+    }
   }
 
   /**
@@ -248,6 +254,16 @@ public class AxonCdiExtension implements Extension {
       configurer.configureTransactionManager(c -> LoggingTransactionManager.INSTANCE);
     }
 
+    // command bus registration
+    if (this.commandBusProducer != null) {
+      final CommandBus commandBus = this.commandBusProducer.produce(bm.createCreationalContext(null));
+      log.info("Registering command bus {}", commandBus.getClass().getSimpleName());
+      configurer.configureCommandBus(c -> commandBus);
+    } else {
+      log.info("No command bus producer found, using default simple command bus.");
+    }
+
+
     // event handling configuration
     final EventHandlingConfiguration eventHandlerConfiguration;
     if (this.eventHandlingConfigurationProducer != null) {
@@ -272,12 +288,6 @@ public class AxonCdiExtension implements Extension {
     // event handler configuration
     configurer.registerModule(eventHandlerConfiguration);
 
-    // register aggregates
-    aggregates.stream().forEach(aggregate -> {
-      log.info("Registering aggregate {}", aggregate.getSimpleName());
-      configurer.configureAggregate(aggregate);
-    });
-
     // event bus
     if (this.eventBusProducer != null) {
       final EventBus eventBus = this.eventBusProducer.produce(bm.createCreationalContext(null));
@@ -299,17 +309,16 @@ public class AxonCdiExtension implements Extension {
       configurer.configureEmbeddedEventStore(c -> eventStorageEngine);
     }
 
-    // command bus registration
-    if (this.commandBusProducer != null) {
-      final CommandBus commandBus = this.commandBusProducer.produce(bm.createCreationalContext(null));
-      log.info("Registering command bus {}", commandBus.getClass().getSimpleName());
-      configurer.configureCommandBus(c -> commandBus);
-    } else {
-      log.info("No command bus producer found, using default simple command bus.");
-    }
+    // register aggregates
+    aggregates.stream().forEach(aggregate -> {
+      log.info("Registering aggregate {}", aggregate.getSimpleName());
+      configurer.configureAggregate(aggregate);
+    });
+
 
     // build and start configuration
     final Configuration configuration = configurer.buildConfiguration();
+    configuration.start();
 
     // register
     abd.addBean(new BeanWrapper<>(Configuration.class, () -> configuration));

@@ -8,6 +8,7 @@ import org.axonframework.eventsourcing.DomainEventMessage;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.serialization.upcasting.event.EventUpcaster;
 
+import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;

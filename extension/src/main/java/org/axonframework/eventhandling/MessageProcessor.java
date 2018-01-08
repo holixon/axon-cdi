@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 /**
  * Interface hiding the wildcard types in order to be produced by CDI.
  *
- * @author Simon Zambrovski, Holisticon AG
+ * @author Simon Zambrovski
  */
 public interface MessageProcessor extends Consumer<List<? extends EventMessage<?>>> {
 
