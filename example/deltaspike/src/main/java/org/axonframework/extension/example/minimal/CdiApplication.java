@@ -14,6 +14,9 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
 
+/**
+ * Main entry class.
+ */
 @Slf4j
 public class CdiApplication {
 
@@ -34,14 +37,19 @@ public class CdiApplication {
   }
 
 
+  /**
+   * Main method interacting with the application.
+   */
   public void run() {
     eventBus.registerDispatchInterceptor(new EventLoggingInterceptor());
     commandGateway.send(new CreateAccountCommand("4711", 1000));
-    // commandBus.dispatch(asCommandMessage(new CreateAccountCommand("4711",
-    // 1000)));
   }
 
-  public static void main(final String[] args) throws Exception {
+  /**
+   * Initializer for CDI.
+   * @param args params.
+   */
+  public static void main(final String[] args) {
     final CdiContainer container = CdiContainerLoader.getCdiContainer();
     try {
       container.boot();

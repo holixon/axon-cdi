@@ -16,7 +16,6 @@ import javax.inject.Inject;
 @Startup
 public class CdiApplication {
 
-
   @Inject
   private EventBus eventBus;
 
@@ -28,9 +27,5 @@ public class CdiApplication {
     log.info("Initializing CDI application");
     eventBus.registerDispatchInterceptor(new EventLoggingInterceptor());
     commandGateway.send(new CreateAccountCommand("4711", 1000));
-    // commandBus.dispatch(asCommandMessage(new CreateAccountCommand("4711",
-    // 1000)));
   }
-
-
 }
