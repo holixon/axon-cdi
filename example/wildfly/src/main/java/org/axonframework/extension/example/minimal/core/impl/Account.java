@@ -14,13 +14,11 @@ import org.axonframework.extension.example.minimal.core.api.CreateAccountCommand
 
 @Slf4j
 @Aggregate
+@NoArgsConstructor
 public class Account {
 
   @AggregateIdentifier
   private String accountId;
-
-  protected Account() {
-  }
 
   @CommandHandler
   public Account(final CreateAccountCommand command) {

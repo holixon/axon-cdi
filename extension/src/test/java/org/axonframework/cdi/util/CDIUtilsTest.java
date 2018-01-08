@@ -20,6 +20,14 @@ public class CDIUtilsTest {
   @Target(ElementType.FIELD)
   public @interface SecondAnnotation {}
 
+  @Retention(RetentionPolicy.RUNTIME)
+  @Target(ElementType.METHOD)
+  public @interface FirstMethodAnnotation {}
+
+  @Retention(RetentionPolicy.RUNTIME)
+  @Target(ElementType.METHOD)
+  public @interface SecondMethodAnnotation {}
+
 
   public static class HasAnnotatedField extends BeanWrapper<HasAnnotatedField>{
     @FirstAnnotation
@@ -29,6 +37,18 @@ public class CDIUtilsTest {
       super(HasAnnotatedField.class, HasAnnotatedField::new);
     }
   }
+
+  public static class HasMethodAnnotation extends BeanWrapper<HasMethodAnnotation> {
+
+    public HasMethodAnnotation() {
+        super(HasMethodAnnotation.class, HasMethodAnnotation::new);
+    }
+    @FirstMethodAnnotation
+    public void foo() {
+
+    }
+  }
+
 
   public static class HasBothAnnotations extends BeanWrapper<HasBothAnnotations>{
     @FirstAnnotation
@@ -54,6 +74,7 @@ public class CDIUtilsTest {
   }
 
 
+
   @Test
   public void hasAnnotatedMember_true() {
     assertThat(CDIUtils.hasAnnotatedMember(new HasAnnotatedField(), FirstAnnotation.class)).isTrue();
@@ -72,5 +93,15 @@ public class CDIUtilsTest {
   @Test
   public void hasAnnotatedMember_both_true() {
     assertThat(CDIUtils.hasAnnotatedMember(new HasBothAnnotations(), FirstAnnotation.class, SecondAnnotation.class)).isTrue();
+  }
+
+  @Test
+  public void hasAnnotatedMethod_true() {
+    assertThat(CDIUtils.hasAnnotatedMethod(new HasMethodAnnotation(), FirstMethodAnnotation.class)).isTrue();
+  }
+
+  @Test
+  public void hasAnnotatedMethod_false() {
+    assertThat(CDIUtils.hasAnnotatedMethod(new HasMethodAnnotation(), SecondMethodAnnotation.class)).isFalse();
   }
 }

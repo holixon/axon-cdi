@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.*;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;

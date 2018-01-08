@@ -13,4 +13,5 @@ public class CDIUtilsITest {
   public void testBeanManager() {
     assertThat(CDIUtils.getBeanManager()).isNotNull();
   }
+
 }
