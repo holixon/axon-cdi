@@ -39,8 +39,10 @@
     <sonar.links.ci>https://travis-ci.org/holisticon/axon-cdi</sonar.links.ci>
     <sonar.links.scm>https://github.com/holisticon/axon-cdi</sonar.links.scm>
     <sonar.links.issue>https://github.com/holisticon/axon-cdi/issues</sonar.links.issue>
+
     <sonar.modules>extension</sonar.modules>
     <extension.sonar.projectName>Axon CDI Extension</extension.sonar.projectName>
+    <extension.sonar.sources>extension/src</extension.sonar.sources>
 
 	</properties>
 
