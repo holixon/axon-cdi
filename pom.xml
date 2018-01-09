@@ -46,9 +46,9 @@
     <sonar.junit.reportsPath>reports/java/surefire-reports</sonar.junit.reportsPath>
     <sonar.jacoco.reportPath>reports/java/jacoco.exec</sonar.jacoco.reportPath>
 
-    <sonar.modules>extension</sonar.modules>
-    <extension.sonar.projectKey>org.axonframework.extension:axon-cdi</extension.sonar.projectKey>
-    <extension.sonar.projectBaseDir>extension</extension.sonar.projectBaseDir>
+    <sonar.modules>axon-cdi</sonar.modules>
+    <axon-cdi.sonar.projectKey>org.axonframework.extension:axon-cdi</axon-cdi.sonar.projectKey>
+    <axon-cdi.sonar.projectBaseDir>extension</axon-cdi.sonar.projectBaseDir>
 	</properties>
 
   <modules>
