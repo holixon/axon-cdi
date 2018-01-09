@@ -9,11 +9,21 @@
 [![Sonar Reliability](https://sonarqube.com/api/badges/measure?key=org.axonframework.extension:axon-cdi-root&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=org.axonframework.extension%3Aaxon-cdi-root)
 
 
-CDI Extension to use AxonFramework 3.x in Container Environments
+This CDI Extension to use AxonFramework 3.x in CDI container environments (Application server or SE).
+
+Minimal tested version is:
+
+ - AxonFramwork 3.1
+ - CDI 1.1
 
 ## Usage
 
-Simply add the following dependency in your Apache Maven `pom.xml`:
+Currently the artifact is not (yet) released to Maven Central and you have to build it locally, running from command line:
+
+      ./mvnw clean install
+      
+At some point of time, we will pass this project to AxonIQ and they will release the extension to Maven Central. If you have
+created the artifact locally, simply add the following dependency in your Apache Maven `pom.xml`:
 
       <dependency>
         <groupId>org.axonframework.extension</groupId>
@@ -38,7 +48,8 @@ It will be automatically collected by the CDI container and registered (Don't fo
 
 ## Examples
 
-Please have a look on examples in `example` folder.
+Please have a look on examples in `example` folder. The `wildfly` example demonstrates the usage inside of a WildFly application server.
+The `deltaspike` example shows the usage in a Java SE environment (without an application server).
 
 ## Advanced usage
 
@@ -50,5 +61,22 @@ If you want to use the JPA based event store inside of a container (e.g. JBoss o
   *  TransactionManager
   *  EventStorageEngine
   *  TokenStore
+  
+
+## Contributing
+
+### Issues
+
+[https://github.com/holisticon/axon-cdi/issues](https://github.com/holisticon/axon-cdi/issues)
+
+### Contributors
+
+*  _[Jan Galinski](https://github.com/galinski)_
+*  _[Simon Zambrovski](https://github.com/zambrovski)_
+
+### License
+
+[APACHE-2.0](https://github.com/holisticon/axon-cdi/blob/master/LICENSE)
+
 
    
