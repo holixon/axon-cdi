@@ -30,6 +30,18 @@
 		<junit.version>4.12</junit.version>
     <assertj.version>3.8.0</assertj.version>
 
+
+    <sonar.projectKey>axon-cdi</sonar.projectKey>
+    <sonar.projectName>Axon CDI</sonar.projectName>
+    <sonar.projectVersion>${project.version}</sonar.projectVersion>
+
+    <sonar.links.homepage>https://github.com/holisticon/axon-cdi</sonar.links.homepage>
+    <sonar.links.ci>https://travis-ci.org/holisticon/axon-cdi</sonar.links.ci>
+    <sonar.links.scm>https://github.com/holisticon/axon-cdi</sonar.links.scm>
+    <sonar.links.issue>https://github.com/holisticon/axon-cdi/issues</sonar.links.issue>
+    <sonar.modules>extension</sonar.modules>
+    <extension.sonar.projectName>Axon CDI Extension</extension.sonar.projectName>
+
 	</properties>
 
   <dependencyManagement>
