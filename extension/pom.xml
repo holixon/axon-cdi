@@ -14,6 +14,22 @@
   <properties>
     <cdi-unit.version>4.0.2</cdi-unit.version>
     <weld.version>3.0.2.Final</weld.version>
+
+    <sonar.projectKey>org.axonframework.extension:axon-cdi</sonar.projectKey>
+    <sonar.projectName>AxonFramework CDI Extension</sonar.projectName>
+    <sonar.projectVersion>${project.version}</sonar.projectVersion>
+
+    <sonar.links.homepage>https://github.com/holisticon/axon-cdi</sonar.links.homepage>
+    <sonar.links.ci>https://travis-ci.org/holisticon/axon-cdi</sonar.links.ci>
+    <sonar.links.scm>https://github.com/holisticon/axon-cdi</sonar.links.scm>
+    <sonar.links.issue>https://github.com/holisticon/axon-cdi/issues</sonar.links.issue>
+
+    <sonar.sources>src/main</sonar.sources>
+    <sonar.tests>src/test</sonar.tests>
+    <sonar.binaries>target/classes</sonar.binaries>
+    <sonar.junit.reportsPath>reports/java/surefire-reports</sonar.junit.reportsPath>
+    <sonar.jacoco.reportPath>reports/java/jacoco.exec</sonar.jacoco.reportPath>
+
   </properties>
 
 
