@@ -11,8 +11,38 @@
 
 CDI Extension to use AxonFramework 3.x in Container Environments
 
+## Usage
 
-## Usage of JPA event store inside container
+Simply add the following dependency in your Apache Maven `pom.xml`:
+
+      <dependency>
+        <groupId>org.axonframework.extension</groupId>
+        <artifactId>axon-cdi</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
+### AxonFramework Building Blocks
+
+Axon CDI provides easy access to most important AxonFramework building blocks. These can simply be injected in your code:
+
+ - CommandBus
+ - CommandGateway
+ - EventBus
+ - Serializer
+ - Configuration
+  
+### Aggregates
+
+Similar to Axon Spring, you can define aggregate roots by putting a simple annotation `org.axonframework.cdi.stereotype.Aggregate` on your class. 
+It will be automatically collected by the CDI container and registered (Don't forget the `beans.xml`).
+
+## Examples
+
+Please have a look on examples in `example` folder.
+
+## Advanced usage
+
+### Usage of JPA event store inside container
 
 If you want to use the JPA based event store inside of a container (e.g. JBoss or Wildfly), you have to configure the following facilities:
 
@@ -20,68 +50,5 @@ If you want to use the JPA based event store inside of a container (e.g. JBoss o
   *  TransactionManager
   *  EventStorageEngine
   *  TokenStore
-  
-In order to work together, consider usage of the following components:
-  
-
-	public class AxonConfiguration {
-	  
-	    /**
-	     * JBoss JNDI address for JTA UserTransaction.
-	     */
-	    private static final String JBOSS_USER_TRANSACTION = "java:jboss/UserTransaction";
-	
-	    @PersistenceContext
-	    private EntityManager entityManager;
-	
-	    /**
-	     * Produces the entity manager provider.
-	     * 
-	     * @return manager provider.
-	     */
-	    @Produces
-	    public EntityManagerProvider getEntityManagerProvider() {
-	        return new SimpleEntityManagerProvider(entityManager);
-	    }
-	
-	    /**
-	     * Produces the transaction manager.
-	     * 
-	     * @return transaction manager.
-	     */
-	    @Produces
-	    public TransactionManager txManager() {
-	        return new ContainerTransactionManager(entityManager, JBOSS_USER_TRANSACTION);
-	    }
-	
-	    /**
-	     * Produces container transaction aware JPA storage engine.
-	     * 
-	     * @param entityManagerProvider
-	     *            provider for EntityManager (will be injected).
-	     * @param txManager
-	     *            TransactionManager (will be injected).
-	     * @return Event storage engine.
-	     */
-	    @Produces
-	    public EventStorageEngine eventStorageEngine(final EntityManagerProvider entityManagerProvider, final TransactionManager txManager) {
-	        return new TxAwareJPAEventStorageEngine(entityManagerProvider, txManager);
-	    }
-	
-	    /**
-	     * Produces JPA token store.
-	     * 
-	     * @param entityManagerProvider
-	     *            provider for EntityManager (will be injected).
-	     * @param serializer
-	     *            Serializer (will be injected).
-	     * @return token store.
-	     */
-	    @Produces
-	    public TokenStore tokenStore(final EntityManagerProvider entityManagerProvider, final Serializer serializer) {
-	        return new JpaTokenStore(entityManagerProvider, serializer);
-	    }
-	    
-	}
 
    
