@@ -31,7 +31,7 @@
     <assertj.version>3.8.0</assertj.version>
 
 
-    <sonar.projectKey>org.axonframework.extension:axon-cdi</sonar.projectKey>
+    <sonar.projectKey>org.axonframework.extension:axon-cdi-root</sonar.projectKey>
     <sonar.projectName>AxonFramework CDI Extension</sonar.projectName>
     <sonar.projectVersion>${project.version}</sonar.projectVersion>
 
@@ -40,6 +40,16 @@
     <sonar.links.scm>https://github.com/holisticon/axon-cdi</sonar.links.scm>
     <sonar.links.issue>https://github.com/holisticon/axon-cdi/issues</sonar.links.issue>
 
+    <sonar.sources>src/main</sonar.sources>
+    <sonar.tests>src/test</sonar.tests>
+    <sonar.binaries>target/classes</sonar.binaries>
+    <sonar.junit.reportsPath>reports/java/surefire-reports</sonar.junit.reportsPath>
+    <sonar.jacoco.reportPath>reports/java/jacoco.exec</sonar.jacoco.reportPath>
+
+    <sonar.modules>extension</sonar.modules>
+
+
+    <extension.sonar.projectKey>org.axonframework.extension:axon-cdi</extension.sonar.projectKey>
 	</properties>
 
   <modules>
