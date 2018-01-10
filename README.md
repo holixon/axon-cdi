@@ -48,8 +48,26 @@ It will be automatically collected by the CDI container and registered (Don't fo
 
 ## Examples
 
-Please have a look on examples in `example` folder. The `wildfly` example demonstrates the usage inside of a WildFly application server.
+Please have a look on examples in `example` folder. 
+
+### DeltaSpike
+
 The `deltaspike` example shows the usage in a Java SE environment (without an application server).
+
+### Wildfly
+
+The `wildfly` example demonstrates the usage inside of a WildFly application server. To start the server try
+
+    cd examples/wildfly
+    mvn wildfly:run wildfly:deploy
+
+### Wildfly Swarm
+
+The `wildfly-swarm` example demonstrates the usage inside of a WildFly Swarm container. This means packaging the application
+together with the required parts of the application server into a single JAR similiar to SpringBoot approach. To start the server try
+
+    cd examples/wildfly-swarm
+    mvn wildfly-swarm:run
 
 ## Advanced usage
 
