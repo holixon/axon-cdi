@@ -17,12 +17,15 @@
     <module>axon-common</module>
     <module>deltaspike</module>
     <module>wildfly</module>
+    <module>wildfly-swarm</module>
   </modules>
 
   <properties>
     <deltaspike.version>1.8.1</deltaspike.version>
     <weld.version>3.0.2.Final</weld.version>
     <hibernate.version>5.2.10.Final</hibernate.version>
+    <h2.version>1.4.196</h2.version>
+    <!-- Skip Sonar in Examples -->
     <sonar.skip>true</sonar.skip>
   </properties>
 
@@ -88,6 +91,12 @@
         <version>${hibernate.version}</version>
       </dependency>
 
+      <!-- H2 -->
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${h2.version}</version>
+      </dependency>
 
       <!-- Test -->
       <dependency>
